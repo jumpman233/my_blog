@@ -1,0 +1,40 @@
+
+
+.footer-main{
+	height: 100px;
+}
+
+.padding-left{
+	padding-left: 100px;
+}
+
+.container{
+	width: 100%;
+	background-color: #DBD0A8;
+}
+
+.article-title{
+	text-align: center;
+}
+
+.main{
+	width: 100%;
+}
+
+.article{
+	margin: 0 auto;
+	height: 300px;
+	background-color: rgba(225, 238, 210, 1);
+}
+
+.sidebar{
+	width: 200px;
+	height: 500px;
+	position: fixed;
+	right: 0px;
+	top: 0px;
+	background-color: red;
+}
+body{
+	margin: 0;
+}
