@@ -4,6 +4,8 @@ import {render} from 'react-dom';
 import Container from './javascripts/Container.js';
 
 //css
-import './stylesheets/style.css';
+import './stylesheets/style.scss';
+import './stylesheets/header.scss';
+import './stylesheets/footer.scss';
 
 render(<Container />, document.getElementsByClassName('container')[0])
