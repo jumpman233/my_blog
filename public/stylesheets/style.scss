@@ -1,4 +1,12 @@
 
+@keyframes get-shot{
+	0%{
+		width: 100%;
+	}
+	100%{
+		width: 800px;
+	}
+}
 
 .footer-main{
 	height: 100px;
@@ -9,16 +17,17 @@
 }
 
 .container{
-	width: 100%;
 	background-color: #DBD0A8;
 }
-
+.shot{
+	animation: get-shot;
+	animation-duration: 1s;
+	animation-timing-function: linear;
+}
 .article-title{
 	text-align: center;
 }
-
-.main{
-	width: 100%;
+body{
 }
 
 .article{
@@ -27,14 +36,15 @@
 	background-color: rgba(225, 238, 210, 1);
 }
 
-.sidebar{
-	width: 200px;
-	height: 500px;
-	position: fixed;
-	right: 0px;
-	top: 0px;
-	background-color: red;
+.hidden{
+	visibility: hidden;
 }
+
+.show{
+	visibility: visible;
+}
+
+
 body{
 	margin: 0;
 }

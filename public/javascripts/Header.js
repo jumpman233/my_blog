@@ -7,14 +7,25 @@ class Header extends React.Component {
 		super(props);
 		this.state = {
 			className : "header-main",
-			fadeInClass: "fade-in"
+			defaultClass: "header-main",
+			fadeInClass: "fade-in",
+			showInClass: "width-reduce-animate"
 		}
 	}
-	static defaultProps = {
-	};
+	
+	titleShowIn(){
+		return new Promise((resolve, reject) => {
+			let str = this.state.defaultClass +" "+ this.state.fadeInClass;
+			this.setState({className: str});
+			window.setTimeout(() => {
+				resolve();
+			}, 500);
+		});
+	}
+
+	componentWillMount(){
+	}
 	componentDidMount(){
-		let str = this.state.className +" "+ this.state.fadeInClass;
-		this.setState({className: str});
 	}
 	render(){
 		return(

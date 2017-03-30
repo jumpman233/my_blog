@@ -7,5 +7,7 @@ import Container from './javascripts/Container.js';
 import './stylesheets/style.scss';
 import './stylesheets/header.scss';
 import './stylesheets/footer.scss';
+import './stylesheets/sidebar.scss';
+import './stylesheets/main.scss';
 
-render(<Container />, document.getElementsByClassName('container')[0])
+render(<Container />, $('#container')[0])

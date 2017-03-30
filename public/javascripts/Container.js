@@ -10,14 +10,51 @@ class Container extends React.Component {
 		super();
 	}
 	state = {
-		isLoad: "true",
-		a: 'b'
+		aniFinish: false,
+		screenData: {
+			width: window.innerWidth,
+			sidebarMaxWidth: 700
+		},
+		className: 'container',
+		defaultClass: 'container',
+		showInClass: 'width-reduce-animate'
+	}
+	showIn(){
+		return new Promise((resolve, reject) => {
+			let str = this.state.defaultClass +" "+ this.state.showInClass;
+			this.setState({className: str});
+			window.setTimeout(() => {
+				resolve();
+			}, 500);
+		})
+	}
+	componentWillMount(){
+		$(window).resize(event =>{
+			this.setState({
+				screenData:{
+					width: window.innerWidth
+				}
+			});
+		});
+	}
+	mainComponentShowIn(){
+		return new Promise((resolve, reject) => {
+			this.showIn.call(this);
+			$('.container').css('margin-right', '200px');
+		})
+	}
+	componentDidMount(){
+		this.refs.header.titleShowIn()
+			.then(() => this.refs.main.refs.sidebar.showIn())
+			.then(() => {
+				this.mainComponentShowIn();
+			})
 	}
 	render(){
 		return(
-			<div className="container">
-				<Header a={this.state.a} />
-				<Main ref="main" />
+			<div className={this.state.className}>
+				<Header ref="header" showIn={this.showIn}/>
+				<Main ref="main" {...this.state.screenData} aniFinish={this.state.aniFinish}/>
 				<Footer />
 			</div>
 		)
