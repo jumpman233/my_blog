@@ -1,0 +1,23 @@
+@keyframes transTwoHun{
+	0%{
+		transform: translate(200px, 0);
+	}
+	100%{
+		transform: translate(0, 0);
+	}
+}
+
+.sidebar-show-in{
+	animation: transTwoHun;
+	animation-duration: 0.5s;
+	animation-timing-function: linear;
+}
+
+.sidebar{
+	width: 200px;
+	height: 100%;
+	position: fixed;
+	right: 0;
+	top: 0;
+	background-color: #222;
+}

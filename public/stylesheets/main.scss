@@ -1,0 +1,18 @@
+@keyframes margin-trans{
+	0%{
+		margin-right: 0;
+	}
+	100%{
+		margin-right: 200px;
+	}
+}
+
+.width-reduce-animate{
+	animation: margin-trans;
+	animation-duration: 0.5s;
+	animation-timing-function: ease;
+}
+
+
+.main{
+}
