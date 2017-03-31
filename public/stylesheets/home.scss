@@ -1,0 +1,32 @@
+.home{
+	padding: 50px 100px;
+	background-color: white;
+}
+
+.summary{
+	padding-left: 50px;
+	background-color: #ddd;
+	border: 1px solid #333;
+	box-shadow: 2px 2px 2px #666;
+	height: 100px;
+	margin-bottom: 20px;
+
+	h1 {
+		font-size: 16px;
+		font-weight: normal;
+	}
+	p {
+		font-size: 12px;
+		font-weight: normal;
+	}
+	.readAll{
+		font-size: 14px;
+		display: inline-block;
+		color: #444;
+		border-bottom: 2px dotted #444;
+	}
+	.readAll:hover{
+		border-bottom: 2px solid black;
+		color: black;
+	}
+}

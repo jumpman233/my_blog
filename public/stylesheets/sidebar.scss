@@ -11,13 +11,22 @@
 	animation: transTwoHun;
 	animation-duration: 0.5s;
 	animation-timing-function: linear;
+	animation-delay: 0.5s;
 }
 
 .sidebar{
 	width: 200px;
 	height: 100%;
 	position: fixed;
-	right: 0;
+	right: -200px;
 	top: 0;
 	background-color: #222;
+}
+
+.sidebar-right{
+	right: -200px;
+}
+
+.sidebar-normal{
+	right: 0;
 }

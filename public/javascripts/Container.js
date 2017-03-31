@@ -4,11 +4,13 @@ import Header from './Header.js';
 import Footer from './Footer.js';
 import Main from './Main.js';
 import $ from 'jquery';
+import {Route} from 'react-router-dom';
 
 class Container extends React.Component {
 	constructor(){
 		super();
 	}
+
 	state = {
 		aniFinish: false,
 		screenData: {
@@ -19,46 +21,62 @@ class Container extends React.Component {
 		defaultClass: 'container',
 		showInClass: 'width-reduce-animate'
 	}
+
+	ifNotShowSidebar(){
+		return !(this.state.screenData.width >= this.state.screenData.sidebarMaxWidth &&
+				this.props.location.pathname.indexOf('article') >= 0);
+	}
+
 	showIn(){
 		return new Promise((resolve, reject) => {
-			let str = this.state.defaultClass +" "+ this.state.showInClass;
-			this.setState({className: str});
-			window.setTimeout(() => {
+			if(this.ifNotShowSidebar()){
 				resolve();
-			}, 500);
+			} else{
+				let str = this.state.defaultClass +" "+ this.state.showInClass;
+				this.setState({className: str});
+				window.setTimeout(() => {
+					resolve();
+				}, 500);
+				$('.container').css('margin-right', '200px');
+			}
 		})
 	}
+
 	componentWillMount(){
 		$(window).resize(event =>{
 			this.setState({
 				screenData:{
-					width: window.innerWidth
+					width: window.innerWidth,
+					sidebarMaxWidth: this.state.screenData.sidebarMaxWidth
 				}
 			});
+			if(this.ifNotShowSidebar()){
+				$('.container').css('margin-right', '0');
+			} else{
+				$('.container').css('margin-right', '200px');
+			}
 		});
 	}
+
 	mainComponentShowIn(){
 		return new Promise((resolve, reject) => {
 			this.showIn.call(this);
-			$('.container').css('margin-right', '200px');
 		})
 	}
+
 	componentDidMount(){
-		this.refs.header.titleShowIn()
-			.then(() => this.refs.main.refs.sidebar.showIn())
-			.then(() => {
-				this.mainComponentShowIn();
-			})
+		this.showIn();
 	}
+
 	render(){
 		return(
 			<div className={this.state.className}>
-				<Header ref="header" showIn={this.showIn}/>
-				<Main ref="main" {...this.state.screenData} aniFinish={this.state.aniFinish}/>
+				<Header ref="header"/>
+				<Main ref="main" {...this.state.screenData}/>
 				<Footer />
 			</div>
 		)
-	};
+	}
 }
 
 export default Container;

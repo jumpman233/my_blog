@@ -1,46 +1,62 @@
 import React from 'react';
 import render from 'react-dom';
+import Util from './Util.js';
 import $ from 'jquery';
 
 class Sidebar extends React.Component{
 	state = {
-		className: 'sidebar hidden',
+		className: 'sidebar',
 		fadeInClass: 'sidebar-show-in',
-		defaultClass: 'sidebar'
+		defaultClass: 'sidebar',
+		rightClass: 'sidebar-right',
+		normalClass: 'sidebar-normal',
+		classes: ['sidebar', 'sidebar-right']
 	}
-	componentDidMount(){
-		var sidebar = $('.sidebar');
-		if(this.props.width <= this.props.maxWidth){
-			sidebar.css('visibility','hidden');
+
+	showIn(curWidth, maxWidth){
+		if(curWidth === undefined || maxWidth === undefined){
+			throw Error('Sidebar showIn(): param error!');
 		}
-	}
-	showIn(){
 		return new Promise((resolve, reject) => {
-			if(this.props.width <= this.props.maxWidth){
+			let sidebar = $('.sidebar');
+			if(curWidth <= maxWidth){
 				resolve();
 			} else {
-				this.setState({className: this.state.defaultClass + ' ' + this.state.fadeInClass});
+				let classes = this.state.classes;
+				if(!Util.haveClass(classes, this.state.fadeInClass)){
+					Util.addClass(classes, this.state.fadeInClass);
+				}
+				if(Util.haveClass(classes, this.state.normalClass)){
+					Util.replaceClass(classes, this.state.normalClass, this.state.rightClass);
+				}
+				this.setState({classes: classes});
 				window.setTimeout(() => {
+					Util.replaceClass(classes, this.state.rightClass, this.state.normalClass);
+					this.setState({classes: classes});
 					resolve();
 				}, 500);
 			}
 		});
 	}
-	componentWillMount(){
+
+	componentDidMount(){
+		this.showIn(this.props.width, this.props.sidebarMaxWidth);
 	}
+
+
 	componentWillUpdate(data){
-		var sidebar = $('.sidebar');
-		if(data.width !== undefined){			
-			if(data.width <= this.props.maxWidth){
-				sidebar.hide();
+		let sidebar = $('.sidebar');
+		if(data.width !== undefined){		
+			if(data.width <= data.sidebarMaxWidth){
+				sidebar.css('visibility', 'hidden');
 			} else{
-				sidebar.show();
+				sidebar.css('visibility', 'visible');
 			}
 		}
 	}
 	render(){
 		return (
-			<aside className={this.state.className}>
+			<aside className={Util.getClassStr(this.state.classes)}>
 			</aside>
 		)
 	}

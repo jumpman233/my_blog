@@ -8,6 +8,22 @@
 	}
 }
 
+@keyframes fade-in{
+	0%{
+		opacity: 0;
+		top: 20px;
+	}
+	100%{
+		opacity: 1;
+		top: 0;
+	}
+}
+
+.fade-in{
+	animation: fade-in;
+	animation-duration: 2s;
+}
+
 .footer-main{
 	height: 100px;
 }
@@ -27,8 +43,6 @@
 .article-title{
 	text-align: center;
 }
-body{
-}
 
 .article{
 	margin: 0 auto;
@@ -44,6 +58,10 @@ body{
 	visibility: visible;
 }
 
+a {
+	text-decoration: none;
+	color: black;
+}
 
 body{
 	margin: 0;

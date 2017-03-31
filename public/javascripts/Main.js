@@ -1,8 +1,10 @@
 import React, {Component} from 'react';
 import {render} from 'react-dom';
+import Home from'./Home.js';
 import Article from './Article.js';
 import Sidebar from './Sidebar.js';
 import $ from 'jquery';
+import {Route} from 'react-router-dom';
 
 class Main extends React.Component {
 	state = {
@@ -12,12 +14,17 @@ class Main extends React.Component {
 	}
 	
 	componentWillUpdate(data){
+		
+	}
+	componentDidMount(){
+
 	}
 	render() {
 		return (
 			<div className={this.state.className}>
-				<Article />
-				<Sidebar ref="sidebar" {...this.props}/>
+				<Route path='/article/:artId' render={() => 
+					<Article {...this.props}/>}/>
+				<Route path='/home' component={Home}/>
 			</div>
 		);
 	}
